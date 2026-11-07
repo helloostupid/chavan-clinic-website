@@ -17,23 +17,72 @@ export const clinicConfig = {
     { label: 'Contact', href: '#contact' },
   ],
 
-  address: {
-    lines: ['[Clinic street address]', '[Area / Landmark]', '[City, State, PIN code]'],
-    placeholder: true,
-  },
-
-  contact: {
-    phone: '',
-    phoneDisplay: 'To be added',
-    whatsapp: '',
-    whatsappDisplay: 'To be added',
-    email: '',
-  },
-
-  // Paste the "Embed a map" src URL from Google Maps here to show the live map.
-  googleMapsEmbedUrl: '',
-  // Paste the Google Maps share link (or any Google Maps search link) for "Get Directions".
-  googleMapsDirectionsUrl: '',
+  // One entry per clinic. Add or remove entries to change the number of locations.
+  locations: [
+    {
+      id: 'clinic-one',
+      label: 'Clinic Location 1',
+      address: {
+        lines: ['[Clinic 1 street address]', '[Area / Landmark]', '[City, State, PIN code]'],
+        placeholder: true,
+      },
+      contact: {
+        phone: '',
+        phoneDisplay: 'To be added',
+        whatsapp: '',
+        whatsappDisplay: 'To be added',
+        email: '',
+      },
+      // Paste the "Embed a map" src URL from Google Maps to show the live map.
+      googleMapsEmbedUrl: '',
+      // Paste the Google Maps directions link for this clinic.
+      googleMapsDirectionsUrl: '',
+      // Use 'To be confirmed' until the real timings are known. Set closed: true for closed days.
+      timings: {
+        schedule: [
+          { day: 'Monday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
+          { day: 'Tuesday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
+          { day: 'Wednesday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
+          { day: 'Thursday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
+          { day: 'Friday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
+          { day: 'Saturday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
+          { day: 'Sunday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
+        ],
+        notes: ['Timings above are placeholders and will be confirmed by the clinic.'],
+        summary: 'To be confirmed',
+      },
+    },
+    {
+      id: 'clinic-two',
+      label: 'Clinic Location 2',
+      address: {
+        lines: ['[Clinic 2 street address]', '[Area / Landmark]', '[City, State, PIN code]'],
+        placeholder: true,
+      },
+      contact: {
+        phone: '',
+        phoneDisplay: 'To be added',
+        whatsapp: '',
+        whatsappDisplay: 'To be added',
+        email: '',
+      },
+      googleMapsEmbedUrl: '',
+      googleMapsDirectionsUrl: '',
+      timings: {
+        schedule: [
+          { day: 'Monday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
+          { day: 'Tuesday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
+          { day: 'Wednesday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
+          { day: 'Thursday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
+          { day: 'Friday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
+          { day: 'Saturday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
+          { day: 'Sunday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
+        ],
+        notes: ['Timings above are placeholders and will be confirmed by the clinic.'],
+        summary: 'To be confirmed',
+      },
+    },
+  ],
 
   doctors: [
     {
@@ -90,24 +139,6 @@ export const clinicConfig = {
       ],
     },
   ],
-
-  // Use 'To be confirmed' until the real timings are known. Set closed: true for closed days.
-  timings: {
-    schedule: [
-      { day: 'Monday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
-      { day: 'Tuesday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
-      { day: 'Wednesday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
-      { day: 'Thursday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
-      { day: 'Friday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
-      { day: 'Saturday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
-      { day: 'Sunday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
-    ],
-    notes: [
-      'Timings above are placeholders and will be confirmed by the clinic.',
-      'Please call ahead before visiting, especially on public holidays.',
-    ],
-    summary: 'To be confirmed',
-  },
 
   // Set enabled: true to show the banner on the website.
   announcement: {

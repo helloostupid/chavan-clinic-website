@@ -23,7 +23,6 @@ export default function Navbar() {
   }, [open])
 
   const closeMenu = () => setOpen(false)
-  const phoneHref = clinicConfig.contact.phone ? `tel:${clinicConfig.contact.phone}` : null
 
   return (
     <header
@@ -55,15 +54,13 @@ export default function Navbar() {
         </ul>
 
         <div className="flex items-center gap-3">
-          {phoneHref && (
-            <a
-              href={phoneHref}
-              className="hidden items-center gap-2 rounded-full bg-sage-600 px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-sage-700 md:inline-flex"
-            >
-              <Phone size={16} aria-hidden="true" />
-              Call Clinic
-            </a>
-          )}
+          <a
+            href="#contact"
+            className="hidden items-center gap-2 rounded-full bg-sage-600 px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-sage-700 md:inline-flex"
+          >
+            <Phone size={16} aria-hidden="true" />
+            Contact Us
+          </a>
           <button
             type="button"
             onClick={() => setOpen((value) => !value)}

@@ -36,23 +36,34 @@ Almost all content is in one file: `src/config/clinicConfig.js`. Edit the values
 | --- | --- |
 | `name`, `tagline`, `introduction` | Clinic name, headline and intro text |
 | `navLinks` | Navigation menu and footer links |
-| `address` | Clinic address lines. Set `placeholder: false` once the address is real |
-| `contact` | Phone, WhatsApp and email. Leave a value empty to show it as "To be added" without a link |
-| `googleMapsEmbedUrl` | Google Maps embed link that shows the live map |
-| `googleMapsDirectionsUrl` | Link used for every "Get Directions" button |
+| `locations` | One entry per clinic (see below) |
 | `doctors` | Doctor names, qualifications, speciality, photo, introduction and consultation areas |
 | `specialities` | Speciality titles, descriptions and service lists |
-| `timings` | Weekly consultation timings per doctor, closed days and notes |
 | `announcement` | Notice banner. Set `enabled: true` to show it; `tone` can be `info`, `warning` or `success` |
 | `disclaimer` | Medical disclaimer shown in the footer |
 
+Each entry in `locations` holds the details for one clinic:
+
+| Setting | What it controls |
+| --- | --- |
+| `label` | Clinic name shown above its map, timings and contact details |
+| `address` | Address lines. Set `placeholder: false` once the address is real |
+| `contact` | Phone, WhatsApp and email. Leave a value empty to show it as "To be added" without a link |
+| `googleMapsEmbedUrl` | Google Maps embed link that shows that clinic's map |
+| `googleMapsDirectionsUrl` | Google Maps directions link for that clinic |
+| `timings` | Weekly timings per doctor for that clinic, closed days, `summary` and `notes` |
+
 Text in square brackets (for example `[Professional introduction to be added ...]`) marks a placeholder that still needs real content.
+
+### Adding or removing a clinic location
+
+The site shows one card per entry in `locations`. To add a second clinic, copy an existing entry (the whole block from `{` to `},`), paste it below, and change `id`, `label`, address, contact, map and timings. To remove a clinic, delete its block. With two or more clinics, the map, contact and timings sections display side by side or in separate blocks.
 
 ### Setting up Google Maps
 
 1. In Google Maps, search for the clinic, then choose **Share** and copy the link for directions.
 2. Open Google Maps, choose **Share > Embed a map**, and copy the URL from the `src` attribute of the iframe code.
-3. Paste the embed URL into `googleMapsEmbedUrl` and the directions link into `googleMapsDirectionsUrl`.
+3. Paste the embed URL into that clinic's `googleMapsEmbedUrl` and the directions link into its `googleMapsDirectionsUrl`. Repeat for each clinic.
 
 ### Adding doctor photographs
 
@@ -69,15 +80,17 @@ src/
     Doctors.jsx          "Meet Our Doctors" section
     DoctorCard.jsx       Single doctor profile card
     Specialities.jsx     Physician and psychiatry services
-    ClinicTimings.jsx    Weekly timings table (stacks on mobile)
+    ClinicTimings.jsx    Weekly timings table per clinic (stacks on mobile)
     Announcements.jsx    Optional notice banner
-    Location.jsx         Map and clinic address
-    Contact.jsx          Phone, WhatsApp, email and address
+    Location.jsx         Map and address card per clinic
+    Contact.jsx          Phone, WhatsApp, email and address per clinic
     Footer.jsx           Branding, links, timings, disclaimer and copyright
     Reveal.jsx           Fade-in on scroll wrapper
     SectionHeading.jsx   Shared section title block
   config/
     clinicConfig.js  All editable clinic information
+  utils/
+    contactLinks.js  Builds phone, WhatsApp and email links
   pages/
     Home.jsx         Assembles the homepage sections
   App.jsx            Page shell (navigation, content, footer)

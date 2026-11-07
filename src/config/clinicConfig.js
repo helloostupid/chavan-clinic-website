@@ -1,6 +1,8 @@
 // Central place for all clinic information. Update the values here to change the website.
 // Values marked "To be added" are placeholders; the site shows them as such until replaced.
 
+const TBC = 'To be confirmed'
+
 export const clinicConfig = {
   name: 'Chavan Clinic',
   tagline: 'Your Health, Our Priority',
@@ -37,20 +39,6 @@ export const clinicConfig = {
       googleMapsEmbedUrl: '',
       // Paste the Google Maps directions link for this clinic.
       googleMapsDirectionsUrl: '',
-      // Use 'To be confirmed' until the real timings are known. Set closed: true for closed days.
-      timings: {
-        schedule: [
-          { day: 'Monday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
-          { day: 'Tuesday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
-          { day: 'Wednesday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
-          { day: 'Thursday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
-          { day: 'Friday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
-          { day: 'Saturday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
-          { day: 'Sunday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
-        ],
-        notes: ['Timings above are placeholders and will be confirmed by the clinic.'],
-        summary: 'To be confirmed',
-      },
     },
     {
       id: 'clinic-two',
@@ -68,19 +56,6 @@ export const clinicConfig = {
       },
       googleMapsEmbedUrl: '',
       googleMapsDirectionsUrl: '',
-      timings: {
-        schedule: [
-          { day: 'Monday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
-          { day: 'Tuesday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
-          { day: 'Wednesday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
-          { day: 'Thursday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
-          { day: 'Friday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
-          { day: 'Saturday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
-          { day: 'Sunday', vivek: 'To be confirmed', shwetali: 'To be confirmed', closed: false },
-        ],
-        notes: ['Timings above are placeholders and will be confirmed by the clinic.'],
-        summary: 'To be confirmed',
-      },
     },
   ],
 
@@ -91,6 +66,8 @@ export const clinicConfig = {
       qualification: 'MD - General Medicine',
       speciality: 'Physician',
       photo: '',
+      // Location ids (from locations above) where this doctor consults.
+      locationIds: ['clinic-one', 'clinic-two'],
       introduction: '[Professional introduction to be added by Dr. Vivek Chavan]',
       consultationAreas: [
         '[Area of consultation to be added]',
@@ -104,6 +81,7 @@ export const clinicConfig = {
       qualification: 'MD - Psychiatry',
       speciality: 'Psychiatrist',
       photo: '',
+      locationIds: ['clinic-one'],
       introduction: '[Professional introduction to be added by Dr. Shwetali Chavan]',
       consultationAreas: [
         '[Area of consultation to be added]',
@@ -139,6 +117,21 @@ export const clinicConfig = {
       ],
     },
   ],
+
+  // Each slot is keyed by doctor id, then location id. Use closed: true for closed days.
+  timings: {
+    schedule: [
+      { day: 'Monday', closed: false, slots: { vivek: { 'clinic-one': TBC, 'clinic-two': TBC }, shwetali: { 'clinic-one': TBC } } },
+      { day: 'Tuesday', closed: false, slots: { vivek: { 'clinic-one': TBC, 'clinic-two': TBC }, shwetali: { 'clinic-one': TBC } } },
+      { day: 'Wednesday', closed: false, slots: { vivek: { 'clinic-one': TBC, 'clinic-two': TBC }, shwetali: { 'clinic-one': TBC } } },
+      { day: 'Thursday', closed: false, slots: { vivek: { 'clinic-one': TBC, 'clinic-two': TBC }, shwetali: { 'clinic-one': TBC } } },
+      { day: 'Friday', closed: false, slots: { vivek: { 'clinic-one': TBC, 'clinic-two': TBC }, shwetali: { 'clinic-one': TBC } } },
+      { day: 'Saturday', closed: false, slots: { vivek: { 'clinic-one': TBC, 'clinic-two': TBC }, shwetali: { 'clinic-one': TBC } } },
+      { day: 'Sunday', closed: false, slots: { vivek: { 'clinic-one': TBC, 'clinic-two': TBC }, shwetali: { 'clinic-one': TBC } } },
+    ],
+    notes: ['Timings above are placeholders and will be confirmed by the clinic.'],
+    summary: TBC,
+  },
 
   // Set enabled: true to show the banner on the website.
   announcement: {

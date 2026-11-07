@@ -2,11 +2,11 @@ import { MapPin, Phone, MessageCircle, Mail, Navigation } from 'lucide-react'
 import { clinicConfig } from '../config/clinicConfig'
 import { telHref, whatsappHref, mailHref } from '../utils/contactLinks'
 
-const { doctors, disclaimer, locations, navLinks } = clinicConfig
+const { doctors, disclaimer, locations, navLinks, timings } = clinicConfig
 const year = new Date().getFullYear()
 
 function FooterLocation({ location }) {
-  const { label, address, contact, googleMapsDirectionsUrl, timings } = location
+  const { label, address, contact, googleMapsDirectionsUrl } = location
   const whatsapp = whatsappHref(contact.whatsapp)
 
   return (
@@ -42,7 +42,6 @@ function FooterLocation({ location }) {
           </a>
         </p>
       )}
-      <p className="text-charcoal-400">Timings: {timings.summary}</p>
       {googleMapsDirectionsUrl && (
         <a
           href={googleMapsDirectionsUrl}
@@ -106,6 +105,7 @@ export default function Footer() {
               <FooterLocation key={location.id} location={location} />
             ))}
           </ul>
+          <p className="mt-6 text-sm text-charcoal-300">Timings: {timings.summary}</p>
         </div>
       </div>
 

@@ -23,7 +23,6 @@ export default function Navbar() {
   }, [open])
 
   const closeMenu = () => setOpen(false)
-  const phoneHref = clinicConfig.contact.phone ? `tel:${clinicConfig.contact.phone}` : null
 
   return (
     <header
@@ -36,17 +35,17 @@ export default function Navbar() {
           <span className="flex h-10 w-10 items-center justify-center rounded-full bg-sage-600 font-serif text-lg font-semibold text-white">
             C
           </span>
-          <span className="font-serif text-xl font-semibold tracking-wide text-charcoal-900">
+          <span className="whitespace-nowrap font-serif text-xl font-semibold tracking-wide text-charcoal-900">
             {clinicConfig.name.toUpperCase()}
           </span>
         </a>
 
-        <ul className="hidden items-center gap-1 lg:flex">
+        <ul className="hidden items-center gap-1 xl:flex">
           {navLinks.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
-                className="rounded-full px-3 py-2 text-sm font-medium text-charcoal-700 transition-colors hover:bg-sage-100 hover:text-sage-700"
+                className="whitespace-nowrap rounded-full px-3 py-2 text-sm font-medium text-charcoal-700 transition-colors hover:bg-sage-100 hover:text-sage-700"
               >
                 {link.label}
               </a>
@@ -55,22 +54,20 @@ export default function Navbar() {
         </ul>
 
         <div className="flex items-center gap-3">
-          {phoneHref && (
-            <a
-              href={phoneHref}
-              className="hidden items-center gap-2 rounded-full bg-sage-600 px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-sage-700 md:inline-flex"
-            >
-              <Phone size={16} aria-hidden="true" />
-              Call Clinic
-            </a>
-          )}
+          <a
+            href="#contact"
+            className="hidden whitespace-nowrap items-center gap-2 rounded-full bg-sage-600 px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-sage-700 xl:inline-flex"
+          >
+            <Phone size={16} aria-hidden="true" />
+            Contact Us
+          </a>
           <button
             type="button"
             onClick={() => setOpen((value) => !value)}
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? 'Close menu' : 'Open menu'}
-            className="flex h-11 w-11 items-center justify-center rounded-full text-charcoal-800 transition-colors hover:bg-sage-100 lg:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-full text-charcoal-800 transition-colors hover:bg-sage-100 xl:hidden"
           >
             {open ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
           </button>
@@ -79,7 +76,7 @@ export default function Navbar() {
 
       <div
         id="mobile-menu"
-        className={`overflow-hidden transition-all duration-300 ease-out lg:hidden ${
+        className={`overflow-hidden transition-all duration-300 ease-out xl:hidden ${
           open ? 'max-h-[80vh] opacity-100' : 'pointer-events-none max-h-0 opacity-0'
         }`}
       >

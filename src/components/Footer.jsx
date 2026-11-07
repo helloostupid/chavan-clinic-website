@@ -1,9 +1,61 @@
 import { MapPin, Phone, MessageCircle, Mail, Navigation } from 'lucide-react'
 import { clinicConfig } from '../config/clinicConfig'
+import { telHref, whatsappHref, mailHref } from '../utils/contactLinks'
 
-const { contact, address, doctors, timings, disclaimer, googleMapsDirectionsUrl, navLinks } = clinicConfig
-const whatsappDigits = contact.whatsapp.replace(/\D/g, '')
+const { doctors, disclaimer, locations, navLinks, timings } = clinicConfig
 const year = new Date().getFullYear()
+
+function FooterLocation({ location }) {
+  const { label, address, contact, googleMapsDirectionsUrl } = location
+  const whatsapp = whatsappHref(contact.whatsapp)
+
+  return (
+    <li className="space-y-3">
+      <p className="font-medium text-white">{label}</p>
+      <address className={`flex items-start gap-3 not-italic ${address.placeholder ? 'text-charcoal-400' : ''}`}>
+        <MapPin size={16} className="mt-0.5 shrink-0 text-sage-300" aria-hidden="true" />
+        <span>{address.lines.join(', ')}</span>
+      </address>
+      <p className="flex items-center gap-3">
+        <Phone size={16} className="shrink-0 text-sage-300" aria-hidden="true" />
+        {telHref(contact.phone) ? (
+          <a href={telHref(contact.phone)} className="transition-colors hover:text-sage-300">
+            {contact.phone}
+          </a>
+        ) : (
+          <span className="text-charcoal-400">{contact.phoneDisplay}</span>
+        )}
+      </p>
+      {whatsapp && (
+        <p className="flex items-center gap-3">
+          <MessageCircle size={16} className="shrink-0 text-sage-300" aria-hidden="true" />
+          <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-sage-300">
+            WhatsApp: {contact.whatsapp}
+          </a>
+        </p>
+      )}
+      {contact.email && (
+        <p className="flex items-center gap-3">
+          <Mail size={16} className="shrink-0 text-sage-300" aria-hidden="true" />
+          <a href={mailHref(contact.email)} className="transition-colors hover:text-sage-300">
+            {contact.email}
+          </a>
+        </p>
+      )}
+      {googleMapsDirectionsUrl && (
+        <a
+          href={googleMapsDirectionsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 font-semibold text-sage-300 transition-colors hover:text-white"
+        >
+          <Navigation size={16} aria-hidden="true" />
+          Get Directions
+        </a>
+      )}
+    </li>
+  )
+}
 
 export default function Footer() {
   return (
@@ -44,73 +96,21 @@ export default function Footer() {
               </li>
             ))}
           </ul>
-          <h3 className="mt-8 text-sm font-semibold uppercase tracking-wider text-white">Timings</h3>
-          <p className="mt-3 text-sm text-charcoal-300">{timings.summary}</p>
         </div>
 
         <div>
-          <h3 className="text-sm font-semibold uppercase tracking-wider text-white">Contact</h3>
-          <ul className="mt-5 space-y-4 text-sm text-charcoal-300">
-            <li className="flex items-start gap-3">
-              <MapPin size={18} className="mt-0.5 shrink-0 text-sage-300" aria-hidden="true" />
-              <address className={`not-italic ${address.placeholder ? 'text-charcoal-400' : ''}`}>
-                {address.lines.join(', ')}
-              </address>
-            </li>
-            <li className="flex items-center gap-3">
-              <Phone size={18} className="shrink-0 text-sage-300" aria-hidden="true" />
-              {contact.phone ? (
-                <a href={`tel:${contact.phone}`} className="transition-colors hover:text-sage-300">
-                  {contact.phone}
-                </a>
-              ) : (
-                <span className="text-charcoal-400">{contact.phoneDisplay}</span>
-              )}
-            </li>
-            <li className="flex items-center gap-3">
-              <MessageCircle size={18} className="shrink-0 text-sage-300" aria-hidden="true" />
-              {whatsappDigits ? (
-                <a
-                  href={`https://wa.me/${whatsappDigits}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition-colors hover:text-sage-300"
-                >
-                  WhatsApp: {contact.whatsapp}
-                </a>
-              ) : (
-                <span className="text-charcoal-400">WhatsApp: {contact.whatsappDisplay}</span>
-              )}
-            </li>
-            {contact.email && (
-              <li className="flex items-center gap-3">
-                <Mail size={18} className="shrink-0 text-sage-300" aria-hidden="true" />
-                <a href={`mailto:${contact.email}`} className="transition-colors hover:text-sage-300">
-                  {contact.email}
-                </a>
-              </li>
-            )}
+          <h3 className="text-sm font-semibold uppercase tracking-wider text-white">Our Clinics</h3>
+          <ul className="mt-5 space-y-6 text-sm text-charcoal-300">
+            {locations.map((location) => (
+              <FooterLocation key={location.id} location={location} />
+            ))}
           </ul>
-          {googleMapsDirectionsUrl && (
-            <a
-              href={googleMapsDirectionsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-sage-300 transition-colors hover:text-white"
-            >
-              <Navigation size={16} aria-hidden="true" />
-              Get Directions
-            </a>
-          )}
+          <p className="mt-6 text-sm text-charcoal-300">Timings: {timings.summary}</p>
         </div>
       </div>
 
       <div className="border-t border-charcoal-700">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-8 text-xs leading-relaxed text-charcoal-400 sm:px-8">
-          <p className="max-w-4xl">
-            <span className="font-semibold text-charcoal-200">Medical disclaimer: </span>
-            {disclaimer}
-          </p>
           <p>
             &copy; {year} {clinicConfig.name}. All rights reserved.
           </p>

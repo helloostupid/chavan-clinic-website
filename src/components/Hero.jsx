@@ -25,7 +25,7 @@ export default function Hero() {
               href="#doctors"
               className="group inline-flex items-center justify-center gap-2 rounded-full bg-sage-600 px-7 py-3.5 text-base font-semibold text-white shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:bg-sage-700 hover:shadow-lift"
             >
-              Explore Our Doctors
+              Our Doctors
               <ArrowRight size={18} aria-hidden="true" className="transition-transform group-hover:translate-x-1" />
             </a>
             <a

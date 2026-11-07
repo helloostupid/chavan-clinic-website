@@ -9,7 +9,7 @@ export default function Doctors() {
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal>
           <SectionHeading
-            eyebrow="Our Team"
+            eyebrow="Our Doctors"
             title="Meet Our Doctors"
             description="Two qualified medical professionals, one shared commitment to careful and compassionate care."
           />

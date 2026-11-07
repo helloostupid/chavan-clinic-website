@@ -68,15 +68,17 @@ function ClinicContactCard({ location }) {
       </ul>
 
       {googleMapsDirectionsUrl && (
-        <a
-          href={googleMapsDirectionsUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-auto inline-flex items-center justify-center gap-2 self-start rounded-full border border-sage-600 px-6 py-3 pt-3 font-semibold text-sage-700 transition-all duration-300 hover:-translate-y-0.5 hover:bg-sage-600 hover:text-white"
-        >
-          <Navigation size={18} aria-hidden="true" />
-          Get Directions
-        </a>
+        <div className="mt-auto pt-8">
+          <a
+            href={googleMapsDirectionsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-sage-600 px-6 py-3 font-semibold text-sage-700 transition-all duration-300 hover:-translate-y-0.5 hover:bg-sage-600 hover:text-white"
+          >
+            <Navigation size={18} aria-hidden="true" />
+            Get Directions
+          </a>
+        </div>
       )}
     </div>
   )

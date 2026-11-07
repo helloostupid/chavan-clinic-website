@@ -1,0 +1,94 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Fraunces', Georgia, serif;
+
+  --color-sage-50: #f4f7f5;
+  --color-sage-100: #e5ece7;
+  --color-sage-200: #cbd9d0;
+  --color-sage-300: #a6bfaf;
+  --color-sage-400: #7d9e8a;
+  --color-sage-500: #5f8170;
+  --color-sage-600: #4c6a5a;
+  --color-sage-700: #3e5649;
+  --color-sage-800: #34473d;
+  --color-sage-900: #2c3b33;
+
+  --color-teal-50: #eef7f7;
+  --color-teal-100: #d5ebeb;
+  --color-teal-500: #3c8a8c;
+  --color-teal-600: #2f7173;
+  --color-teal-700: #275b5d;
+
+  --color-sand-50: #faf8f4;
+  --color-sand-100: #f3efe6;
+  --color-sand-200: #e6dfd0;
+
+  --color-charcoal-50: #f5f5f4;
+  --color-charcoal-100: #e7e7e5;
+  --color-charcoal-200: #d0d1ce;
+  --color-charcoal-300: #b4b5b1;
+  --color-charcoal-400: #8f918c;
+  --color-charcoal-500: #6b6e69;
+  --color-charcoal-600: #53564f;
+  --color-charcoal-700: #3f423c;
+  --color-charcoal-800: #2b2d29;
+  --color-charcoal-900: #1d1f1c;
+
+  --color-success-600: #2e7d4f;
+  --color-success-100: #dff1e6;
+  --color-warning-600: #9a6b12;
+  --color-warning-100: #f8efd9;
+  --color-error-600: #b4423b;
+  --color-error-100: #f8e3e1;
+
+  --animate-fade-up: fade-up 0.8s ease-out both;
+
+  --shadow-soft: 0 1px 2px rgb(29 31 28 / 0.04), 0 8px 24px -8px rgb(29 31 28 / 0.08);
+  --shadow-lift: 0 2px 4px rgb(29 31 28 / 0.04), 0 18px 40px -12px rgb(29 31 28 / 0.16);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-sand-50 font-sans text-charcoal-800 antialiased;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  @apply font-serif text-charcoal-900;
+  line-height: 1.2;
+}
+
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -2,9 +2,12 @@ import { MapPin, Navigation, MapPinOff } from 'lucide-react'
 import { clinicConfig } from '../config/clinicConfig'
 import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
+import { useLanguage } from '../hooks/useLanguage'
+import { translate } from '../config/translations'
 
-function LocationCard({ location }) {
-  const { address, googleMapsEmbedUrl, googleMapsDirectionsUrl, label } = location
+function LocationCard({ location, t }) {
+  const { address, googleMapsEmbedUrl, googleMapsDirectionsUrl } = location
+  const label = t(`location.${location.id}`)
 
   return (
     <div className="flex h-full flex-col overflow-hidden rounded-3xl border border-charcoal-100 bg-white shadow-soft">
@@ -12,7 +15,7 @@ function LocationCard({ location }) {
         {googleMapsEmbedUrl ? (
           <iframe
             src={googleMapsEmbedUrl}
-            title={`Map showing the location of ${label}`}
+            title={t('locations.mapTitle', { clinic: label })}
             className="absolute inset-0 h-full w-full border-0"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -23,9 +26,9 @@ function LocationCard({ location }) {
             <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-sage-600 shadow-soft">
               <MapPinOff size={24} aria-hidden="true" />
             </span>
-            <p className="font-serif text-xl text-charcoal-900">Map location to be added</p>
+            <p className="font-serif text-xl text-charcoal-900">{t('locations.mapMissing')}</p>
             <p className="max-w-xs text-sm leading-relaxed text-charcoal-500">
-              Add this clinic&apos;s Google Maps embed link in the clinic configuration file.
+              {t('locations.mapInstructions')}
             </p>
           </div>
         )}
@@ -60,11 +63,11 @@ function LocationCard({ location }) {
               className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-sage-600 px-6 py-3.5 font-semibold text-white shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:bg-sage-700 hover:shadow-lift"
             >
               <Navigation size={18} aria-hidden="true" />
-              Get Directions
+              {t('locations.directions')}
             </a>
           ) : (
             <p className="rounded-full bg-charcoal-50 px-6 py-3.5 text-center text-sm font-medium text-charcoal-500">
-              Directions link to be added
+              {t('locations.directionsMissing')}
             </p>
           )}
         </div>
@@ -75,22 +78,24 @@ function LocationCard({ location }) {
 
 export default function Location() {
   const { locations } = clinicConfig
+  const { language } = useLanguage()
+  const t = (key, values) => translate(language, key, values)
 
   return (
     <section id="find-us" className="bg-white py-24 sm:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal>
           <SectionHeading
-            eyebrow="Locations"
-            title="Visit Chavan Clinic"
-            description="Find our clinics on the map, then open directions in Google Maps for turn-by-turn guidance."
+            eyebrow={t('locations.eyebrow')}
+            title={t('locations.title')}
+            description={t('locations.description')}
           />
         </Reveal>
 
         <div className={`mt-16 grid gap-8 ${locations.length > 1 ? 'lg:grid-cols-2' : 'mx-auto max-w-3xl'}`}>
           {locations.map((location, index) => (
             <Reveal key={location.id} delay={index * 150} className="h-full">
-              <LocationCard location={location} />
+              <LocationCard location={location} t={t} />
             </Reveal>
           ))}
         </div>

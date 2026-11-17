@@ -1,27 +1,18 @@
 import { HeartHandshake, Users, ShieldCheck } from 'lucide-react'
-import { clinicConfig } from '../config/clinicConfig'
 import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
-
-const highlights = [
-  {
-    icon: Users,
-    title: 'Two doctors, one clinic',
-    text: 'Physician and psychiatric care under one roof, with both doctors involved in your care where needed.',
-  },
-  {
-    icon: HeartHandshake,
-    title: 'Listening first',
-    text: 'Every consultation starts with understanding your concerns, your history and what matters to you.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Professional standards',
-    text: 'Care delivered with clear communication, respect for your privacy and qualified medical judgement.',
-  },
-]
+import { useLanguage } from '../hooks/useLanguage'
+import { translate } from '../config/translations'
 
 export default function About() {
+  const { language } = useLanguage()
+  const t = (key) => translate(language, key)
+  const highlights = [
+    { icon: Users, title: 'about.highlight1.title', text: 'about.highlight1.text' },
+    { icon: HeartHandshake, title: 'about.highlight2.title', text: 'about.highlight2.text' },
+    { icon: ShieldCheck, title: 'about.highlight3.title', text: 'about.highlight3.text' },
+  ]
+
   return (
     <section id="about" className="bg-white py-24 sm:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -29,9 +20,9 @@ export default function About() {
           <Reveal>
             <SectionHeading
               align="left"
-              eyebrow="About Us"
-              title={`Welcome to ${clinicConfig.name}`}
-              description={`${clinicConfig.name} is a private medical clinic run by Dr. Vivek Chavan, a physician, and Dr. Shwetali Chavan, a psychiatrist. We provide thoughtful consultations for both physical and mental health, with the aim of making every visit clear, comfortable and unhurried.`}
+              eyebrow={t('about.eyebrow')}
+              title={t('about.title')}
+              description={t('about.description')}
             />
           </Reveal>
 
@@ -45,8 +36,8 @@ export default function About() {
                       <Icon size={24} aria-hidden="true" />
                     </span>
                     <div>
-                      <h3 className="text-xl">{item.title}</h3>
-                      <p className="mt-2 leading-relaxed text-charcoal-500">{item.text}</p>
+                      <h3 className="text-xl">{t(item.title)}</h3>
+                      <p className="mt-2 leading-relaxed text-charcoal-500">{t(item.text)}</p>
                     </div>
                   </li>
                 </Reveal>

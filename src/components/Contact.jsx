@@ -3,6 +3,8 @@ import { clinicConfig } from '../config/clinicConfig'
 import { telHref, whatsappHref, mailHref } from '../utils/contactLinks'
 import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
+import { useLanguage } from '../hooks/useLanguage'
+import { translate } from '../config/translations'
 
 function ContactRow({ icon: Icon, label, value, href, external = false }) {
   const content = (
@@ -37,8 +39,9 @@ function ContactRow({ icon: Icon, label, value, href, external = false }) {
   )
 }
 
-function ClinicContactCard({ location }) {
-  const { label, address, contact, googleMapsDirectionsUrl } = location
+function ClinicContactCard({ location, t }) {
+  const { address, contact, googleMapsDirectionsUrl } = location
+  const label = t(`location.${location.id}`)
   const whatsapp = whatsappHref(contact.whatsapp)
 
   return (
@@ -53,18 +56,18 @@ function ClinicContactCard({ location }) {
       <ul className="mt-8 grid gap-4">
         <ContactRow
           icon={Phone}
-          label="Phone"
-          value={contact.phone || contact.phoneDisplay}
+          label={t('contact.phone')}
+          value={contact.phone || contact.phoneDisplay || t('contact.toBeAdded')}
           href={telHref(contact.phone)}
         />
         <ContactRow
           icon={MessageCircle}
-          label="WhatsApp"
-          value={contact.whatsapp || contact.whatsappDisplay}
+          label={t('contact.whatsapp')}
+          value={contact.whatsapp || contact.whatsappDisplay || t('contact.toBeAdded')}
           href={whatsapp}
           external
         />
-        <ContactRow icon={Mail} label="Email" value={contact.email || 'To be added'} href={mailHref(contact.email)} />
+        <ContactRow icon={Mail} label={t('contact.email')} value={contact.email || t('contact.toBeAdded')} href={mailHref(contact.email)} />
       </ul>
 
       {googleMapsDirectionsUrl && (
@@ -76,7 +79,7 @@ function ClinicContactCard({ location }) {
             className="inline-flex items-center justify-center gap-2 rounded-full border border-sage-600 px-6 py-3 font-semibold text-sage-700 transition-all duration-300 hover:-translate-y-0.5 hover:bg-sage-600 hover:text-white"
           >
             <Navigation size={18} aria-hidden="true" />
-            Get Directions
+            {t('locations.directions')}
           </a>
         </div>
       )}
@@ -86,22 +89,24 @@ function ClinicContactCard({ location }) {
 
 export default function Contact() {
   const { locations } = clinicConfig
+  const { language } = useLanguage()
+  const t = (key) => translate(language, key)
 
   return (
     <section id="contact" className="bg-sand-50 py-24 sm:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal>
           <SectionHeading
-            eyebrow="Get In Touch"
-            title="Contact Chavan Clinic"
-            description="Call, message or write to the clinic you wish to visit."
+            eyebrow={t('contact.eyebrow')}
+            title={t('contact.title')}
+            description={t('contact.description')}
           />
         </Reveal>
 
         <div className={`mt-16 grid gap-8 ${locations.length > 1 ? 'lg:grid-cols-2' : 'mx-auto max-w-3xl'}`}>
           {locations.map((location, index) => (
             <Reveal key={location.id} delay={index * 150} className="h-full">
-              <ClinicContactCard location={location} />
+              <ClinicContactCard location={location} t={t} />
             </Reveal>
           ))}
         </div>

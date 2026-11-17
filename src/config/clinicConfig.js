@@ -5,13 +5,14 @@ export const clinicConfig = {
     'Chavan Clinic offers physician and psychiatric consultations in a calm, caring and professional setting. Our goal is to listen carefully, explain clearly and support every patient through their care.',
 
   navLinks: [
-    { label: 'Home', href: '#home' },
-    { label: 'About Us', href: '#about' },
-    { label: 'Our Doctors', href: '#doctors' },
-    { label: 'Specialities', href: '#specialities' },
-    { label: 'Clinic Timings', href: '#timings' },
-    { label: 'Find Us', href: '#find-us' },
-    { label: 'Contact', href: '#contact' },
+    { key: 'home', to: '/' },
+    { key: 'about', to: '/#about' },
+    { key: 'doctors', to: '/#doctors' },
+    { key: 'specialities', to: '/#specialities' },
+    { key: 'timings', to: '/#timings' },
+    { key: 'locations', to: '/#find-us' },
+    { key: 'contact', to: '/#contact' },
+    { key: 'information', to: '/medical-info' },
   ],
 
   locations: [
@@ -23,9 +24,9 @@ export const clinicConfig = {
         placeholder: true,
       },
       contact: {
-        phone: '+91 8055506512',
+        phone: '+91 9421916512',
         phoneDisplay: '',
-        whatsapp: '+91 8055506512',
+        whatsapp: '+91 9421916512',
         whatsappDisplay: '',
         email: 'vivekchavan6111@gmail.com',
       },
@@ -61,13 +62,6 @@ export const clinicConfig = {
       locationIds: ['clinic-one', 'clinic-two'],
       introduction:
       'Dr. Vivek Chavan is a physician specialising in General Medicine. He focuses on understanding patients’ health concerns, providing medical evaluations and guiding them towards appropriate care. His approach emphasises careful assessment, clear communication and personalised attention.',
-      consultationAreas: [
-        'General health check-ups and medical consultations',
-        'Fever, infections and common illnesses',
-        'Diabetes and blood pressure management',
-        'Preventive healthcare and routine health assessments',
-        'Follow-up consultations and ongoing medical care',
-      ],
     },
     {
       id: 'shwetali',
@@ -78,13 +72,6 @@ export const clinicConfig = {
       locationIds: ['clinic-one'],
       introduction:
       'Dr. Shwetali Chavan is a psychiatrist specialising in mental health and emotional well-being. She provides a supportive and understanding environment for individuals seeking help with mental health concerns. Her approach focuses on careful assessment, individual needs and guiding patients through their mental healthcare journey.',
-      consultationAreas: [
-        'Anxiety and stress-related concerns',
-        'Depression and mood-related concerns',
-        'Sleep-related difficulties',
-        'Emotional and behavioural concerns',
-        'Mental health assessments and follow-up consultations',
-      ],
     },
   ],
 
@@ -227,5 +214,10 @@ export const clinicConfig = {
     tone: 'info',
     title: 'Clinic Notice',
     message: 'Example: The clinic will be closed on public holidays. Please call ahead.',
+  },
+
+  medicalInfo: {
+    resources: [],
+    doctorVideos: [],
   },
 }

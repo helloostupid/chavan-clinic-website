@@ -1,8 +1,8 @@
 # Chavan Clinic Website
 
-A responsive, multi-section website for Chavan Clinic, built with React, Vite, Tailwind CSS and Lucide React icons.
+A responsive Chavan Clinic website with one scrolling home page and a separate Medical Information page, built with React, Vite, React Router, Tailwind CSS and Lucide React icons.
 
-The site introduces the clinic, showcases Dr. Vivek Chavan (MD, General Medicine, Physician) and Dr. Shwetali Chavan (MD, Psychiatry, Psychiatrist), describes the two specialities, shows clinic timings, a location section with Google Maps, contact details and a footer.
+The home page contains the clinic overview, doctors, specialities, timings, locations and contact details. Medical Information has QR-linked resources and doctor videos. Visitors can switch between English and Marathi.
 
 ## Requirements
 
@@ -30,24 +30,36 @@ To create a production build, run `npm run build`. To preview that build, run `n
 
 ## Updating the Clinic Information
 
-Almost all content is in one file: `src/config/clinicConfig.js`. Edit the values there and save; the website updates automatically.
+Clinic details and resource links are in `src/config/clinicConfig.js`. Interface and clinic-copy translations are in `src/config/translations.js`.
 
 | Setting | What it controls |
 | --- | --- |
 | `name`, `tagline`, `introduction` | Clinic name, headline and intro text |
-| `navLinks` | Navigation menu and footer links |
+| `navLinks` | Home-page section links, Medical Information link and footer links |
 | `locations` | One entry per clinic (see below) |
-| `doctors` | Doctor names, qualifications, speciality, photo, introduction, consultation areas and `locationIds` (the clinics where the doctor consults) |
+| `doctors` | Doctor names, qualifications, speciality, photo, introduction and `locationIds` (the clinics where the doctor consults) |
 | `specialities` | Speciality titles, descriptions and service lists |
-| `timings` | One combined weekly timings table. Each day lists each doctor's timing at each clinic they attend, plus `closed`, `summary` and `notes` |
+| `timings` | Doctor hours by day and clinic. Consecutive days with the same schedule are grouped in the timings section |
 | `announcement` | Notice banner. Set `enabled: true` to show it; `tone` can be `info`, `warning` or `success` |
-| `disclaimer` | Medical disclaimer shown in the footer |
+| `medicalInfo` | QR-linked educational resources and doctor videos for the Medical Information page |
+
+### Adding medical resources and videos
+
+Add resource items to `medicalInfo.resources` with a unique `id`, localized `title` and `description` objects (`en` and `mr`), and an `https://` `url`. A QR code is generated locally for each resource URL.
+
+Add doctor video items to `medicalInfo.doctorVideos` with a unique `id`, localized `title`, the doctor's name, and a YouTube `embedUrl`. An optional `url` can link to the public video page. The embedded player accepts YouTube and YouTube-nocookie URLs.
+
+The Medical Information page currently has empty resource lists until the clinic's QR destinations and doctor video links are provided.
+
+### Editing English and Marathi copy
+
+Edit the matching English and Marathi entries in `src/config/translations.js`. The language selection is saved in the visitor's browser and applies across page navigation.
 
 Each entry in `locations` holds the details for one clinic:
 
 | Setting | What it controls |
 | --- | --- |
-| `label` | Clinic name shown in the timings table, map and contact details |
+| `label` | Clinic name shown in location and contact details |
 | `address` | Address lines. Set `placeholder: false` once the address is real |
 | `contact` | Phone, WhatsApp and email. Leave a value empty to show it as "To be added" without a link |
 | `googleMapsEmbedUrl` | Google Maps embed link that shows that clinic's map |
@@ -80,27 +92,33 @@ src/
     Doctors.jsx          "Meet Our Doctors" section
     DoctorCard.jsx       Single doctor profile card
     Specialities.jsx     Physician and psychiatry services
-    ClinicTimings.jsx    Combined weekly timings table for all doctors and clinics
+    ClinicTimings.jsx    Grouped schedule cards for doctors and clinics
     Announcements.jsx    Optional notice banner
     Location.jsx         Map and address card per clinic
     Contact.jsx          Phone, WhatsApp, email and address per clinic
-    Footer.jsx           Branding, links, timings, disclaimer and copyright
+    Footer.jsx           Branding, navigation, clinic details and copyright
     Reveal.jsx           Fade-in on scroll wrapper
     SectionHeading.jsx   Shared section title block
   config/
-    clinicConfig.js  All editable clinic information
+    clinicConfig.js       All editable clinic information
+    translations.js       English and Marathi copy
   utils/
     contactLinks.js  Builds phone, WhatsApp and email links
   pages/
-    Home.jsx         Assembles the homepage sections
-  App.jsx            Page shell (navigation, content, footer)
-  main.jsx           Application entry point
-  index.css          Tailwind theme (colours, fonts) and global styles
+    Home.jsx                Clinic landing page
+    MedicalInformation.jsx QR resources and doctor videos
+  context/
+    LanguageProvider.jsx   Persistent English/Marathi language state
+  hooks/
+    useLanguage.js        Accesses the selected language
+  App.jsx                 Page routes and shared shell
+  main.jsx                Application entry point
+  index.css               Tailwind theme (colours, fonts) and global styles
 ```
 
 ## Future Features
 
-The site is intentionally static. Appointment booking, patient feedback, an FAQ section, an admin dashboard and database or login features are not included yet. New sections can be added as components and placed in `src/pages/Home.jsx`.
+The app uses hash-based routing for the separate Medical Information page and home-page section links, so it works on static hosting without server-side route rewrites. It does not include appointment booking, patient feedback, an admin dashboard or database/login features.
 
 ## Medical Disclaimer
 
